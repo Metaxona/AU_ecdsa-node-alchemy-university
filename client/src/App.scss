@@ -23,6 +23,7 @@ label {
 }
 
 .container {
+  max-width: 700px;
   flex-grow: 1;
   margin: 0 20px;
   background-color: #fff;
@@ -38,6 +39,14 @@ label {
   .button {
     margin-top: 10px;
   }
+}
+
+.table{
+  width: 100%;
+}
+
+.centerText{
+  text-align: center;
 }
 
 input {
@@ -62,6 +71,9 @@ input {
   &:hover {
     cursor: pointer;
   }
+  &:disabled{
+    cursor: not-allowed;
+  }
 }
 
 .wallet {
@@ -83,4 +95,9 @@ input {
 .transfer {
   display: flex;
   flex-direction: column;
+}
+
+.errormsg{
+  color: rgb(194, 32, 32);
+  font-size: small;
 }
