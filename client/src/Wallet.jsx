@@ -5,7 +5,15 @@ import { toHex } from 'ethereum-cryptography/utils'
 import { useState } from "react";
 
 function getETHAddressFromPrivateKey(privateKey){
-  return "0x" + toHex(keccak256(secp256k1.getPublicKey(privateKey).slice(1)).slice(-20))
+      const publicKey = secp256k1.getPublicKey(privateKey, false)
+        
+      function getAddress(_publicKey){
+          return keccak256(_publicKey.slice(1)).slice(-20)
+      }
+        
+      const address = `0x${toHex(getAddress(publicKey))}`
+      
+      return  address
 }
 
 function hexStringToUint8Array(hexString){
