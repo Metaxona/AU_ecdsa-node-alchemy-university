@@ -10,13 +10,17 @@ function NewAccount({fetchData, setFetchData}) {
     
     function generatepupriv(){
         const privateKey = secp256k1.utils.randomPrivateKey()
-        const publicKey = secp256k1.getPublicKey(privateKey)
-        const keccak = keccak256(publicKey.slice(1))
-        const hex = Array.from(keccak.slice(-20)).map((b) => b.toString(16).padStart(2, "0")).join("");
+        const publicKey = secp256k1.getPublicKey(privateKey, false)
+        
+        function getAddress(_publicKey){
+            return keccak256(_publicKey.slice(1)).slice(-20)
+        }
+        
+        const address = `0x${toHex(getAddress(publicKey))}`
         
         return {
             privateKey: toHex(privateKey),
-            publicKey: `0x${hex}`
+            publicKey: address
         }
     }
     async function newaccount(evt){
